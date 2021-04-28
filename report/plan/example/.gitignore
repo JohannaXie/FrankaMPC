@@ -1,0 +1,6 @@
+# We want to have these particular .eps and .pdf in the repo.
+
+!plan.pdf
+!gantt.eps
+!gantt.pdf
+!UML.pdf

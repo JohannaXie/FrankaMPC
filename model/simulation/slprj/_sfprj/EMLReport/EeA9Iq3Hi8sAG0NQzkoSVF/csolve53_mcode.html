@@ -1,0 +1,133 @@
+<!-- saved from url=(0014)about:internet -->
+<html>
+<body>
+<script src="resources/eml_report_loadable_data.js"></script>
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="22,1" id="srcline1">  1</a></span><span class="line"><span class="comment"><span class="message fatal" id="M1F53C">%</span> csolve  Solves a custom quadratic program very rapidly.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,2" id="srcline2">  2</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,3" id="srcline3">  3</a></span><span class="line"><span class="comment">% [vars, status] = csolve(params, settings)</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,4" id="srcline4">  4</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,5" id="srcline5">  5</a></span><span class="line"><span class="comment">% solves the convex optimization problem</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,6" id="srcline6">  6</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,7" id="srcline7">  7</a></span><span class="line"><span class="comment">%   minimize(quad_form(x_1, Q) + quad_form(x_2, Q) + quad_form(x_3, Q) + quad_form(x_4, Q) + quad_form(x_5, Q) + quad_form(x_6, Q) + quad_form(x_7, Q) + quad_form(x_8, Q) + quad_form(x_9, Q) + quad_form(x_10, Q) + quad_form(u_0, R) + quad_form(u_1, R) + quad_form(u_2, R) + quad_form(u_3, R) + quad_form(u_4, R) + quad_form(u_5, R) + quad_form(u_6, R) + quad_form(u_7, R) + quad_form(u_8, R) + quad_form(u_9, R))</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,8" id="srcline8">  8</a></span><span class="line"><span class="comment">%   subject to</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,9" id="srcline9">  9</a></span><span class="line"><span class="comment">%     z_1 == A*z_0 + B*u_0</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,10" id="srcline10"> 10</a></span><span class="line"><span class="comment">%     z_2 == A*z_1 + B*u_1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,11" id="srcline11"> 11</a></span><span class="line"><span class="comment">%     z_3 == A*z_2 + B*u_2</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,12" id="srcline12"> 12</a></span><span class="line"><span class="comment">%     z_4 == A*z_3 + B*u_3</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,13" id="srcline13"> 13</a></span><span class="line"><span class="comment">%     z_5 == A*z_4 + B*u_4</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,14" id="srcline14"> 14</a></span><span class="line"><span class="comment">%     z_6 == A*z_5 + B*u_5</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,15" id="srcline15"> 15</a></span><span class="line"><span class="comment">%     z_7 == A*z_6 + B*u_6</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,16" id="srcline16"> 16</a></span><span class="line"><span class="comment">%     z_8 == A*z_7 + B*u_7</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,17" id="srcline17"> 17</a></span><span class="line"><span class="comment">%     z_9 == A*z_8 + B*u_8</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,18" id="srcline18"> 18</a></span><span class="line"><span class="comment">%     z_10 == A*z_9 + B*u_9</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,19" id="srcline19"> 19</a></span><span class="line"><span class="comment">%     abs(u_0) &lt;= u_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,20" id="srcline20"> 20</a></span><span class="line"><span class="comment">%     abs(u_1) &lt;= u_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,21" id="srcline21"> 21</a></span><span class="line"><span class="comment">%     abs(u_2) &lt;= u_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,22" id="srcline22"> 22</a></span><span class="line"><span class="comment">%     abs(u_3) &lt;= u_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,23" id="srcline23"> 23</a></span><span class="line"><span class="comment">%     abs(u_4) &lt;= u_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,24" id="srcline24"> 24</a></span><span class="line"><span class="comment">%     abs(u_5) &lt;= u_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,25" id="srcline25"> 25</a></span><span class="line"><span class="comment">%     abs(u_6) &lt;= u_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,26" id="srcline26"> 26</a></span><span class="line"><span class="comment">%     abs(u_7) &lt;= u_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,27" id="srcline27"> 27</a></span><span class="line"><span class="comment">%     abs(u_8) &lt;= u_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,28" id="srcline28"> 28</a></span><span class="line"><span class="comment">%     abs(u_9) &lt;= u_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,29" id="srcline29"> 29</a></span><span class="line"><span class="comment">%     x_1 &lt;= x_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,30" id="srcline30"> 30</a></span><span class="line"><span class="comment">%     x_2 &lt;= x_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,31" id="srcline31"> 31</a></span><span class="line"><span class="comment">%     x_3 &lt;= x_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,32" id="srcline32"> 32</a></span><span class="line"><span class="comment">%     x_4 &lt;= x_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,33" id="srcline33"> 33</a></span><span class="line"><span class="comment">%     x_5 &lt;= x_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,34" id="srcline34"> 34</a></span><span class="line"><span class="comment">%     x_6 &lt;= x_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,35" id="srcline35"> 35</a></span><span class="line"><span class="comment">%     x_7 &lt;= x_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,36" id="srcline36"> 36</a></span><span class="line"><span class="comment">%     x_8 &lt;= x_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,37" id="srcline37"> 37</a></span><span class="line"><span class="comment">%     x_9 &lt;= x_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,38" id="srcline38"> 38</a></span><span class="line"><span class="comment">%     x_10 &lt;= x_max</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,39" id="srcline39"> 39</a></span><span class="line"><span class="comment">%     x_1 &gt;= x_min</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,40" id="srcline40"> 40</a></span><span class="line"><span class="comment">%     x_2 &gt;= x_min</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,41" id="srcline41"> 41</a></span><span class="line"><span class="comment">%     x_3 &gt;= x_min</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,42" id="srcline42"> 42</a></span><span class="line"><span class="comment">%     x_4 &gt;= x_min</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,43" id="srcline43"> 43</a></span><span class="line"><span class="comment">%     x_5 &gt;= x_min</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,44" id="srcline44"> 44</a></span><span class="line"><span class="comment">%     x_6 &gt;= x_min</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,45" id="srcline45"> 45</a></span><span class="line"><span class="comment">%     x_7 &gt;= x_min</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,46" id="srcline46"> 46</a></span><span class="line"><span class="comment">%     x_8 &gt;= x_min</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,47" id="srcline47"> 47</a></span><span class="line"><span class="comment">%     x_9 &gt;= x_min</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,48" id="srcline48"> 48</a></span><span class="line"><span class="comment">%     x_10 &gt;= x_min</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,49" id="srcline49"> 49</a></span><span class="line"><span class="comment">%     x_10 == rf</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,50" id="srcline50"> 50</a></span><span class="line"><span class="comment">%     x_0 == z_0 + Gamma_1h*u_0</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,51" id="srcline51"> 51</a></span><span class="line"><span class="comment">%     x_1 == z_1 + Gamma_1h*u_1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,52" id="srcline52"> 52</a></span><span class="line"><span class="comment">%     x_2 == z_2 + Gamma_1h*u_2</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,53" id="srcline53"> 53</a></span><span class="line"><span class="comment">%     x_3 == z_3 + Gamma_1h*u_3</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,54" id="srcline54"> 54</a></span><span class="line"><span class="comment">%     x_4 == z_4 + Gamma_1h*u_4</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,55" id="srcline55"> 55</a></span><span class="line"><span class="comment">%     x_5 == z_5 + Gamma_1h*u_5</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,56" id="srcline56"> 56</a></span><span class="line"><span class="comment">%     x_6 == z_6 + Gamma_1h*u_6</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,57" id="srcline57"> 57</a></span><span class="line"><span class="comment">%     x_7 == z_7 + Gamma_1h*u_7</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,58" id="srcline58"> 58</a></span><span class="line"><span class="comment">%     x_8 == z_8 + Gamma_1h*u_8</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,59" id="srcline59"> 59</a></span><span class="line"><span class="comment">%     x_9 == z_9 + Gamma_1h*u_9</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,60" id="srcline60"> 60</a></span><span class="line"><span class="comment">%     x_10 == z_10</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,61" id="srcline61"> 61</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,62" id="srcline62"> 62</a></span><span class="line"><span class="comment">% with variables</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,63" id="srcline63"> 63</a></span><span class="line"><span class="comment">%      u_0   1 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,64" id="srcline64"> 64</a></span><span class="line"><span class="comment">%      u_1   1 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,65" id="srcline65"> 65</a></span><span class="line"><span class="comment">%      u_2   1 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,66" id="srcline66"> 66</a></span><span class="line"><span class="comment">%      u_3   1 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,67" id="srcline67"> 67</a></span><span class="line"><span class="comment">%      u_4   1 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,68" id="srcline68"> 68</a></span><span class="line"><span class="comment">%      u_5   1 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,69" id="srcline69"> 69</a></span><span class="line"><span class="comment">%      u_6   1 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,70" id="srcline70"> 70</a></span><span class="line"><span class="comment">%      u_7   1 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,71" id="srcline71"> 71</a></span><span class="line"><span class="comment">%      u_8   1 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,72" id="srcline72"> 72</a></span><span class="line"><span class="comment">%      u_9   1 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,73" id="srcline73"> 73</a></span><span class="line"><span class="comment">%      x_1   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,74" id="srcline74"> 74</a></span><span class="line"><span class="comment">%      x_2   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,75" id="srcline75"> 75</a></span><span class="line"><span class="comment">%      x_3   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,76" id="srcline76"> 76</a></span><span class="line"><span class="comment">%      x_4   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,77" id="srcline77"> 77</a></span><span class="line"><span class="comment">%      x_5   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,78" id="srcline78"> 78</a></span><span class="line"><span class="comment">%      x_6   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,79" id="srcline79"> 79</a></span><span class="line"><span class="comment">%      x_7   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,80" id="srcline80"> 80</a></span><span class="line"><span class="comment">%      x_8   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,81" id="srcline81"> 81</a></span><span class="line"><span class="comment">%      x_9   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,82" id="srcline82"> 82</a></span><span class="line"><span class="comment">%     x_10   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,83" id="srcline83"> 83</a></span><span class="line"><span class="comment">%      z_0   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,84" id="srcline84"> 84</a></span><span class="line"><span class="comment">%      z_1   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,85" id="srcline85"> 85</a></span><span class="line"><span class="comment">%      z_2   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,86" id="srcline86"> 86</a></span><span class="line"><span class="comment">%      z_3   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,87" id="srcline87"> 87</a></span><span class="line"><span class="comment">%      z_4   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,88" id="srcline88"> 88</a></span><span class="line"><span class="comment">%      z_5   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,89" id="srcline89"> 89</a></span><span class="line"><span class="comment">%      z_6   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,90" id="srcline90"> 90</a></span><span class="line"><span class="comment">%      z_7   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,91" id="srcline91"> 91</a></span><span class="line"><span class="comment">%      z_8   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,92" id="srcline92"> 92</a></span><span class="line"><span class="comment">%      z_9   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,93" id="srcline93"> 93</a></span><span class="line"><span class="comment">%     z_10   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,94" id="srcline94"> 94</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,95" id="srcline95"> 95</a></span><span class="line"><span class="comment">% and parameters</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,96" id="srcline96"> 96</a></span><span class="line"><span class="comment">%        A   3 x 3</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,97" id="srcline97"> 97</a></span><span class="line"><span class="comment">%        B   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,98" id="srcline98"> 98</a></span><span class="line"><span class="comment">% Gamma_1h   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,99" id="srcline99"> 99</a></span><span class="line"><span class="comment">%        Q   3 x 3    PSD</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,100" id="srcline100">100</a></span><span class="line"><span class="comment">%        R   1 x 1    PSD</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,101" id="srcline101">101</a></span><span class="line"><span class="comment">%       rf   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,102" id="srcline102">102</a></span><span class="line"><span class="comment">%    u_max   1 x 1    positive</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,103" id="srcline103">103</a></span><span class="line"><span class="comment">%      x_0   3 x 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,104" id="srcline104">104</a></span><span class="line"><span class="comment">%    x_max   3 x 1    positive</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,105" id="srcline105">105</a></span><span class="line"><span class="comment">%    x_min   3 x 1    negative</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,106" id="srcline106">106</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,107" id="srcline107">107</a></span><span class="line"><span class="comment">% Note:</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,108" id="srcline108">108</a></span><span class="line"><span class="comment">%   - Check status.converged, which will be 1 if optimization succeeded.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,109" id="srcline109">109</a></span><span class="line"><span class="comment">%   - You don't have to specify settings if you don't want to.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,110" id="srcline110">110</a></span><span class="line"><span class="comment">%   - To hide output, use settings.verbose = 0.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,111" id="srcline111">111</a></span><span class="line"><span class="comment">%   - To change iterations, use settings.max_iters = 20.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,112" id="srcline112">112</a></span><span class="line"><span class="comment">%   - You may wish to compare with cvxsolve to check the solver is correct.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,113" id="srcline113">113</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,114" id="srcline114">114</a></span><span class="line"><span class="comment">% Specify params.A, <span class="keyword">...</span><span class="comment">, params.x_min, then run</span></span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,115" id="srcline115">115</a></span><span class="line"><span class="comment">%   [vars, status] = csolve(params, settings)</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,116" id="srcline116">116</a></span><span class="line"><span class="comment">% Produced by CVXGEN, 2019-12-10 11:49:04 -0500.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,117" id="srcline117">117</a></span><span class="line"><span class="comment">% CVXGEN is Copyright (C) 2006-2017 Jacob Mattingley, jem@cvxgen.com.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,118" id="srcline118">118</a></span><span class="line"><span class="comment">% The code in this file is Copyright (C) 2006-2017 Jacob Mattingley.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,119" id="srcline119">119</a></span><span class="line"><span class="comment">% CVXGEN, or solvers produced by CVXGEN, cannot be used for commercial</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,120" id="srcline120">120</a></span><span class="line"><span class="comment">% applications without prior written permission from Jacob Mattingley.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,121" id="srcline121">121</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="22,122" id="srcline122">122</a></span><span class="line"><span class="comment">% Filename: csolve.m.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,123" id="srcline123">123</a></span><span class="line"><span class="comment">% Description: Help file for the Matlab solver interface.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="22,124" id="srcline124">124</a></span><span class="line"> </span></span>
+</pre>
+</div>
+</body>
+</html>

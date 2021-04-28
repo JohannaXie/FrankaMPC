@@ -1,0 +1,18 @@
+We are proposing the code structure seen in Figure \ref{fig:uml} for our project. Considering a structure using four different packages the project can be split up and developed independently from one another. Furthermore, the packages represent the division of labour proposed in section \ref{sec:division}
+
+\begin{figure}[H] 
+	\centering
+	\includegraphics[scale=0.3]{figures/UMLstructure.jpg}
+    \caption{The structure of the software.}
+    \label{fig:uml}
+\end{figure}
+
+\noindent
+The hardware setup will include:
+\begin{itemize}
+\item The robot arm.
+\item Two cameras mounted behind the robot.
+\item An arduino to distribute signals to the servos in the robot arm.
+\item A PC to run the software on.
+\end{itemize}
+The overall software design can be found in Figure \ref{fig:uml}. We have aimed for a design with low coupling between the different modules, the monitor package will be the central connection point of the program. This package will communicate information to the remaining packages. Since most packages will be able to run independently, they will run on different threads. Most software will be written in java, the exception being the software that will run on the arduino, this will be written in the "arduino language".

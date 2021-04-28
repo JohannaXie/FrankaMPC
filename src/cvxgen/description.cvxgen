@@ -1,0 +1,51 @@
+# Produced by CVXGEN, 2019-12-21 11:21:07 -0500.
+# CVXGEN is Copyright (C) 2006-2017 Jacob Mattingley, jem@cvxgen.com.
+# The code in this file is Copyright (C) 2006-2017 Jacob Mattingley.
+# CVXGEN, or solvers produced by CVXGEN, cannot be used for commercial
+# applications without prior written permission from Jacob Mattingley.
+
+# Filename: description.cvxgen.
+# Description: A description of the CVXGEN problem.
+
+dimensions
+  m = 1 # inputs
+  n = 3 # states, (q, v, a)
+  N = 25 # prediction horizon
+end
+
+parameters
+  A (n,n) # dynamics matrix
+  B (n,m) # transfer matrix
+  Q (n,n) psd # state cost, see Section 4.2
+  R (m,m) psd # input cost, see Section 4.2
+
+  x[0] (n) # initial state, cont.time
+
+  # for constraints
+  rf (n) # final state
+  u_max nonnegative # amplitude limit
+  x_max (n) nonnegative # q_max, v_max, a_max
+  x_min (n) negative # q_min, v_min, a_min
+  Gamma_1h (n) # see Section 3.2
+end
+
+variables
+  z[k] (n), k=0..N  # controlled variables
+  u[k] (m), k=0..N-1    # input
+  x[k] (n), k=1..N  # states
+end
+
+minimize
+  sum[k=1..N](quad(x[k], Q)) + sum[k=0..N-1](quad(u[k],R)) # cost funciton, see section
+
+subject to
+  z[k+1] == A*z[k] + B*u[k], k=0..N-1  # dynamics constraints, see Section 3.2
+
+  # See Section 3.3
+  abs(u[k]) <= u_max, k=0..N-1  # maximum input box constraint
+  x[k] <= x_max, k=1..N # maximum states
+  x[k] >= x_min, k=1..N # minimum states
+  x[N] == rf # constraint on final state
+  x[k] == z[k]+Gamma_1h*u[k], k = 0..N-1
+  x[N] == z[N]
+end

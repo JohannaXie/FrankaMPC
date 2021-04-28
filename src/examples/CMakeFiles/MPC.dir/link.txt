@@ -1,0 +1,1 @@
+/usr/bin/c++    -pthread   CMakeFiles/MPC.dir/MPC.cpp.o solver.o ldl.o util.o matrix_support.o  -o MPC libexamples_common.a ../libfranka.so.0.7.1 -Wl,-rpath,/home/robproj/panda/libfranka: 

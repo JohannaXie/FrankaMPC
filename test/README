@@ -1,0 +1,2 @@
+Tests for the source code. If your source code only consists of a single arduino program it might not be meaningful to do unit testing, but if you have a more complex project we strongly encourage you to have unit and integration testing of your code.
+

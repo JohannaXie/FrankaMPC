@@ -1,0 +1,1 @@
+/usr/bin/c++    -pthread   CMakeFiles/print_joint_poses.dir/print_joint_poses.cpp.o  -o print_joint_poses libexamples_common.a ../libfranka.so.0.7.1 -Wl,-rpath,/home/robproj/panda/libfranka: 

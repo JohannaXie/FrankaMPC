@@ -1,0 +1,1 @@
+/usr/bin/c++    -pthread   CMakeFiles/motion_with_control.dir/motion_with_control.cpp.o  -o motion_with_control libexamples_common.a /usr/lib/libPocoFoundation.so ../libfranka.so.0.7.1 -Wl,-rpath,/home/robproj/panda/libfranka: 

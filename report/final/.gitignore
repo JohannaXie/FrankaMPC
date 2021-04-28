@@ -1,0 +1,7 @@
+# In the template directory we do want the template and class files.
+
+!final.tex
+!final.pdf
+!LTHtwocol.cls
+
+

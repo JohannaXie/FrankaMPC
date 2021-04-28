@@ -1,0 +1,1 @@
+/usr/bin/c++    -pthread   CMakeFiles/force_control.dir/force_control.cpp.o  -o force_control libexamples_common.a ../libfranka.so.0.7.1 -Wl,-rpath,/home/robproj/panda/libfranka: 

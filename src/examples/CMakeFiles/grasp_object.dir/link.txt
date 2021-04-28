@@ -1,0 +1,1 @@
+/usr/bin/c++    -pthread   CMakeFiles/grasp_object.dir/grasp_object.cpp.o  -o grasp_object libexamples_common.a ../libfranka.so.0.7.1 -Wl,-rpath,/home/robproj/panda/libfranka: 

@@ -1,0 +1,11 @@
+We have decided to split our project into three parts: image analysis, hardware and servo position implementation, and finding ball trajectory and general code structure.
+	\subsection{Image analysis}
+        The image analysis is a major part of our project. Without it working, we will not have a reference for the ball position. Therefore, if the image analysis is not working, we will not have a working project. We will be using two cameras (see Section \ref{sec:equipment}) to determine the position of the ball. 
+    
+        Olle Flitig and Sara Rask will be in charge of this section. We decided that it was a two person job since it is a quite daunting task.
+    
+    \subsection{Hardware and servo position}
+        We will try to control the position of the servos based on a 3D point (which tells us  where the ball is supposed to land). Most of the hardware implementation and the servo control will be handled by this package. Björn Duktig is in charge of this section.
+    
+    \subsection{Ball trajectory and general code structure}
+        We will try to estimate the final position of the ball based on a few Cartesian points (identified by the image analysis section). Furthermore, the general structure of the code will be handled by this task (e.g. the observer-observable implementation and the semaphores in the monitor). Amanda P. Solver is in charge of this section. It is also planned that she will aid in the "optimal" trajectory estimation for the robot arm (Hardware section).
